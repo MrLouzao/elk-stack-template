@@ -3,6 +3,9 @@ filebeat.config:
     path: ${path.config}/modules.d/*.yml
     reload.enabled: false
 
+
+#-------- Input logs with correspondant configuration. With json.key the json inputs are processed as separated fields
+# on elasticserach, allowing you select on kibana those fields as columns
 filebeat.inputs:
   - type: log
     enabled: true
@@ -22,11 +25,12 @@ processors:
 
 
 
-## Setup the index name template. After that, create an index following the pattern!
+#-------- Setup the index name template. After that, create an index following the pattern!
 setup.template.name: "louzao"
 setup.template.pattern: "louzao-*"
 setup.template.fields: ./fields.yml
 
+#-------- Put the correspondant pattern of your file on index field. Must match the setup.template.pattern.
 output.elasticsearch:
   hosts: ["elasticsearch-pruebas:9200"]
   index: "louzao-macarrones"
