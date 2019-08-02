@@ -1,0 +1,3 @@
+Ejecuto la siguiente instrucción en el terminal. Debo estar en el mismo directorio donde está el fichero accounts.json.
+
+$curl -H 'Content-Type: application/x-ndjson' -XPOST 'localhost:9200/bank/account/_bulk?pretty' --data-binary @accounts.json

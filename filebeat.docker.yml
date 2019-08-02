@@ -1,0 +1,36 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /usr/share/logs/out.log
+    json.keys_under_root: true
+    json.add_error_key: true
+    json.message_key: log       
+
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+processors:
+- add_cloud_metadata: ~
+
+
+
+## Setup the index name template. After that, create an index following the pattern!
+setup.template.name: "louzao"
+setup.template.pattern: "louzao-*"
+setup.template.fields: ./fields.yml
+
+output.elasticsearch:
+  hosts: ["elasticsearch-pruebas:9200"]
+  index: "louzao-macarrones"
+  indices:
+    - index: "louzao-macarrones"
+
+
